@@ -24,6 +24,8 @@ const Favorites = ({ favorites, removeFavorite, api }) => {
 
     if (favorites.length > 0) {
       fetchFavoriteWeather();
+    } else {
+      setFavoriteWeather([]);
     }
   }, [favorites, api]);
 
