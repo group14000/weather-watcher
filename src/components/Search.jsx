@@ -6,12 +6,12 @@ const Search = ({ setSearch, searchPressed }) => {
       <input
         type="text"
         placeholder="Enter city/town..."
-        className="p-2 border border-gray-400 rounded mr-2"
+        className="p-2 border border-gray-400 rounded mr-2 shadow-lg"
         onChange={(e) => setSearch(e.target.value)}
       />
       <button
         onClick={searchPressed}
-        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 shadow-lg"
       >
         Search
       </button>

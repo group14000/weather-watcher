@@ -59,9 +59,9 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-blue-400 to-blue-100 flex flex-col items-center justify-center">
       <header className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Weather App</h1>
+        <h1 className="text-4xl font-bold mb-4 text-white">Weather App</h1>
         <Search setSearch={setSearch} searchPressed={searchPressed} />
         {typeof weather.main !== "undefined" && (
           <WeatherDisplay
