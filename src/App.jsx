@@ -16,6 +16,7 @@ const App = () => {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) || []
   );
+  const [isCelsius, setIsCelsius] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -58,6 +59,14 @@ const App = () => {
     setFavorites(favorites.filter((favorite) => favorite !== city));
   };
 
+  const convertTemp = (temp) => {
+    return isCelsius ? temp : (temp * 9/5) + 32;
+  };
+
+  const toggleUnit = () => {
+    setIsCelsius(!isCelsius);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-400 to-blue-100 flex flex-col items-center justify-center">
       <header className="text-center">
@@ -65,16 +74,21 @@ const App = () => {
         <Search setSearch={setSearch} searchPressed={searchPressed} />
         {typeof weather.main !== "undefined" && (
           <WeatherDisplay
-            weather={weather}
-            forecast={forecast}
+            weather={{ ...weather, main: { ...weather.main, temp: convertTemp(weather.main.temp) }}}
+            forecast={forecast.map(day => ({ ...day, main: { ...day.main, temp: convertTemp(day.main.temp) }}))}
             addFavorite={addFavorite}
+            isCelsius={isCelsius}
           />
         )}
         <Favorites
           favorites={favorites}
           removeFavorite={removeFavorite}
           api={api}
+          isCelsius={isCelsius}
         />
+        <button onClick={toggleUnit} className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700 shadow-lg">
+          {isCelsius ? "Convert to Fahrenheit" : "Convert to Celsius"}
+        </button>
       </header>
     </div>
   );

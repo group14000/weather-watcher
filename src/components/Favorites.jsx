@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Favorites = ({ favorites, removeFavorite, api }) => {
+const Favorites = ({ favorites, removeFavorite, api, isCelsius }) => {
   const [favoriteWeather, setFavoriteWeather] = useState([]);
 
   useEffect(() => {
@@ -29,6 +29,10 @@ const Favorites = ({ favorites, removeFavorite, api }) => {
     }
   }, [favorites, api]);
 
+  const convertTemp = (temp) => {
+    return isCelsius ? temp : (temp * 9/5) + 32;
+  };
+
   return (
     <div className="mt-6 w-full max-w-md">
       <h2 className="text-xl font-bold mb-4 text-white">Favorite Cities:</h2>
@@ -38,7 +42,7 @@ const Favorites = ({ favorites, removeFavorite, api }) => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xl font-semibold">{cityWeather.name}</p>
-                <p className="text-2xl">{cityWeather.main.temp}°C</p>
+                <p className="text-2xl">{convertTemp(cityWeather.main.temp)}°{isCelsius ? "C" : "F"}</p>
                 <p className="text-lg">{cityWeather.weather[0].main}</p>
                 <p className="text-gray-600">({cityWeather.weather[0].description})</p>
               </div>

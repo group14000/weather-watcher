@@ -1,12 +1,12 @@
 import React from "react";
 
-const WeatherDisplay = ({ weather, forecast, addFavorite }) => {
+const WeatherDisplay = ({ weather, forecast, addFavorite, isCelsius }) => {
   return (
     <div className="bg-white p-6 rounded shadow-md mb-6 w-full max-w-md">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xl font-semibold">{weather.name}</p>
-          <p className="text-2xl">{weather.main.temp}°C</p>
+          <p className="text-2xl">{weather.main.temp}°{isCelsius ? "C" : "F"}</p>
           <p className="text-lg">{weather.weather[0].main}</p>
           <p className="text-gray-600">({weather.weather[0].description})</p>
         </div>
@@ -35,7 +35,7 @@ const WeatherDisplay = ({ weather, forecast, addFavorite }) => {
                 alt={day.weather[0].description}
                 className="w-12 h-12 mx-auto"
               />
-              <p>{day.main.temp}°C</p>
+              <p>{day.main.temp}°{isCelsius ? "C" : "F"}</p>
               <p>{day.weather[0].main}</p>
               <p className="text-gray-600">({day.weather[0].description})</p>
             </div>
